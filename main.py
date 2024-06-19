@@ -1,4 +1,3 @@
-import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api_analytics.fastapi import Analytics
@@ -7,9 +6,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from routes.route import router
-from dotenv import load_dotenv
-
-load_dotenv()
+from utils import env
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["30/minute"])
 app = FastAPI(title="StopMalwareContent API",
@@ -30,7 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.add_middleware(SlowAPIMiddleware)
-app.add_middleware(Analytics, api_key=os.getenv("ANALYTICS_API_KEY"))
+app.add_middleware(Analytics, api_key=env.ANALYTICS_API_KEY)
 
 
 @app.get("/")
