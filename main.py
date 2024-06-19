@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-limiter = Limiter(key_func=get_remote_address, default_limits=["10/minute"])
+limiter = Limiter(key_func=get_remote_address, default_limits=["30/minute"])
 app = FastAPI(title="StopMalwareContent API",
               description="The official StopMalwareContent API, to send you json responses.",
               version="1.1")
