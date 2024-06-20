@@ -1,4 +1,4 @@
-def individual_serial(site) -> dict:
+def siteEntity(site) -> dict:
     return {
         "id": str(site["_id"]),
         "domain": site["domain"],
@@ -8,5 +8,5 @@ def individual_serial(site) -> dict:
     }
 
 
-def list_serial(sites) -> list:
-    return (individual_serial(site) for site in sites)
+def siteEntities(sites) -> list:
+    return (siteEntity(site) for site in sites)
