@@ -1,12 +1,12 @@
-def siteEntity(site) -> dict:
+def inviteEntity(invite) -> dict:
     return {
-        "id": str(site["_id"]),
-        "domain": site["domain"],
-        "notes": site["notes"],
-        "path": site["path"],
-        "reason": site["reason"]
+        "id": str(invite["_id"]),
+        "invite": "https://discord.gg/" + invite["domain"],
+        "notes": invite["notes"],
+        "path": invite["path"],
+        "reason": invite["reason"]
     }
 
 
-def siteEntities(sites) -> list:
-    return (siteEntity(site) for site in sites)
+def inviteEntities(invites) -> list:
+    return [inviteEntity(invite) for invite in invites]

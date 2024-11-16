@@ -1,8 +1,8 @@
 from pydantic import BaseModel
 
 
-class IllegalSite(BaseModel):
-    domain: str
+class IllegalInvite(BaseModel):
+    invite: str
     notes: str
     path: str
     reason: str

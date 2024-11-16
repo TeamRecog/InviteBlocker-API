@@ -5,19 +5,19 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
-from routes import sites
+from routes import invites
 from utils import env
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["30/minute"])
-app = FastAPI(title="StopMalwareContent API",
-              description="The official StopMalwareContent API, to send you json responses.",
-              version="1.1")
+app = FastAPI(title="InviteBlocker API",
+              description="InviteBlocker's API to manage blocked invites.",
+              version="0.0.1")
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 origins = ["*"]
 
-app.include_router(sites.router)
+app.include_router(invites.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,4 +33,4 @@ app.add_middleware(Analytics, api_key=env.ANALYTICS_API_KEY)
 @app.get("/")
 @limiter.exempt
 def read_root():
-    return {f"StopMalwareContent API v{app.version}"}
+    return {f"InviteBlocker API v{app.version}"}
